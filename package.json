@@ -1,5 +1,5 @@
 {
-  "name": "covi19",
+  "name": "expenseTracker",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
