@@ -7,7 +7,7 @@ import appContext from '../context/AppContext';
    useEffect(()=>{
     calculateIncome()
     calculateExpenses()
-    
+    // eslint-disable-next-line
    },[transactions])
   
   return(

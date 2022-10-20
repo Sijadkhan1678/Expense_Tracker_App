@@ -1,15 +1,16 @@
-import { Transaction } from "../types/Types"
+import { Transaction,Types } from "../types/Types"
 
-export type Action =  { type: 'ADD_TRANSACTION',  payload:Transaction} 
 
-                     | {type: 'DELETE_TRANSACTION', payload: number | string | undefined} 
+export type Action =  { type: Types.ADD_TRANSACTION,  payload:Transaction} 
 
-                     | {type: 'CALCULATE_BALANCE',payload:number} 
+                     | {type: Types.DELETE_TRANSACTION, payload: number | string | undefined} 
+
+                     | {type: Types.CALCULATE_BALANCE,payload:number} 
                      
-                     | {type: 'CALCULATE_INCOME',payload:number[]} 
+                     | {type: Types.CALCULATE_INCOME,payload:number[]} 
 
-                     | {type: 'CALCULATE_EXPENSE',payload:number[]}  
+                     | {type: Types.CALCULATE_EXPENSE,payload:number[]}  
                      
-                     | {type: 'SHOW_FORM' } 
+                     | {type: Types.SHOW_FORM } 
                      
-                     | {type: 'CLOSE_FORM' } 
+                     | {type: Types.CLOSE_FORM } 

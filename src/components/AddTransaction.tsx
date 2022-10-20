@@ -18,20 +18,24 @@ import { Transaction } from "../types/Types";
        
     }
     const {amount,title,catagory} = transaction
+    
 
     const onSubmit = (e:FormEvent) =>{
       
       e.preventDefault();
 
       if(amount ==='' || title ==='' || catagory === ''){
-          console.log(title)
+          
         const error =  title ==='' ? 'please add title' : 'please add amount';
-         console.log('error',error)
+         alert(error)
       } 
     
       else{
-       
-          addTransaction({amount: (amount),title,catagory})
+
+        if(typeof amount === 'string'){
+
+          addTransaction({amount: parseInt(amount),title,catagory})
+        }
         
           setTransaction({amount:'',title:'',catagory:''})
           showForm(true)

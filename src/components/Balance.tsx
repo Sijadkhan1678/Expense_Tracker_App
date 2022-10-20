@@ -7,6 +7,7 @@ import appContext from '../context/AppContext'
 
   useEffect(()=>{
    calculateBalance()
+   // eslint-disable-next-line
   },[transactions])
   
   return (

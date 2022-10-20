@@ -1,16 +1,8 @@
 import React,{FC, useContext} from "react";
 import appContext from "../context/AppContext";
-import {Transaction} from '../types/Types'
+import {TransactionItemProps} from '../types/Types'
 
-// type TransactionItem = {
-//    id: number
-//    title: string
-//    amount: number
-//    img: string
-// }
-type TransactionItemProps = {
-   transaction: Transaction
-}
+
 const TransactionsItem:FC <TransactionItemProps> = ({transaction:{id,title,amount,img}}) => {
   
 console.log('id value',id)
