@@ -2,6 +2,7 @@ import React,{useEffect,useContext, FC} from 'react';
 import appContext from '../context/AppContext';
 
  const AccountSummary:FC = () => {
+   
    const {transactions,income,expense,calculateIncome,calculateExpenses} = useContext(appContext);
    
    useEffect(()=>{

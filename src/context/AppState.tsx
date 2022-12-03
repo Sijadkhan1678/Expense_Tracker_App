@@ -1,96 +1,97 @@
-import React,{FC,useReducer, PropsWithChildren} from 'react'
+import React, { FC, useReducer, PropsWithChildren } from 'react'
 import appContext from './AppContext'
 import AppReducer from './AppReducer'
 import Catagory from './Catagory'
-import {Transaction, Types} from '../types/Types'
+import { Transaction, Types } from '../types/Types'
 
 
 
- const AppState:FC<PropsWithChildren> = ({children}) => {
+const AppState: FC<PropsWithChildren> = ({ children }) => {
 
-const initialState = { 
+  const initialState = {
 
-   transactions:[],  
+    transactions: [],
     income: 0,
     expense: 0,
     balance: 0,
-    form: false, 
- }
+    form: false,
+  }
 
- const [state,dispatch] = useReducer(AppReducer,initialState)
- const transactions:any = state.transactions.map( (transaction:Transaction) => transaction.amount)
+  const [state, dispatch] = useReducer(AppReducer, initialState)
+  const transactions: any = state.transactions.map((transaction: Transaction) => transaction.amount)
 
- // function generate id fo every transaction
- const generateId = () =>  (Math.random()*1000).toFixed(0)
- 
- // function to add transaction
- const addTransaction = (transaction:Transaction) => {
-  
-  let catagory = Catagory.filter( catagory => catagory.type === transaction.catagory)  
+  // function generate id fo every transaction
+  const generateId = () => (Math.random() * 1000).toFixed(0)
 
-     transaction.img = catagory[0].image
-     transaction.id = generateId()
-    
+  // function to add transaction
+  const addTransaction = (transaction: Transaction) => {
 
-      dispatch({
-        type: Types.ADD_TRANSACTION,
-        payload: transaction
-      })    
- }
- 
- // function to delete transaction from transaction history
- const deleteTransaction = (id:number | string | undefined):void => {
+    let catagory = Catagory.filter(catagory => catagory.type === transaction.catagory);
+
+    transaction.img = catagory[0].image;
+    transaction.id = generateId();
+
+
     dispatch({
-      type:Types.DELETE_TRANSACTION,
+      type: Types.ADD_TRANSACTION,
+      payload: transaction
+    })
+  }
+
+  // function to delete transaction from transaction history
+  const deleteTransaction = ( id: number | string ): void => {
+    dispatch({
+      type: Types.DELETE_TRANSACTION,
       payload: id
     })
- }
+  }
 
-// function calculate balance
-const calculateBalance = () => { 
+  // function calculate balance
+  const calculateBalance = () => {
 
-  const balance:number = transactions.reduce( (acc:number, amount:number) => amount += acc ,0)
-  dispatch({type:Types.CALCULATE_BALANCE,payload: balance})
-   
- }
-// function to calculate income
-const calculateIncome = ():void => {
-  
-  const income:number[] = transactions.filter((amount:number) => amount >= 0)
-  
-  dispatch({ type: Types.CALCULATE_INCOME,  payload: income})
-}
+    const balance: number = transactions.reduce((acc: number, amount: number) => amount += acc, 0)
+    dispatch({ type: Types.CALCULATE_BALANCE, payload: balance })
 
-// function to calculate expenses 
-const calculateExpenses = ():void => {
+  }
+  // function to calculate income
+  const calculateIncome = (): void => {
 
-  const expenses:number[] = transactions.filter( (amount:number) => amount < 0);
-  
-  dispatch({type: Types.CALCULATE_EXPENSE, payload: expenses})
-}
-const showForm =  (close:boolean) => {
+    const income: number[] = transactions.filter((amount: number) => amount >= 0)
 
-  if(close) { dispatch({type: Types.CLOSE_FORM}) }
+    dispatch({ type: Types.CALCULATE_INCOME, payload: income })
+  }
 
-   else {dispatch({type: Types.SHOW_FORM}) }  
-    
- }
+  // function to calculate expenses 
+  const calculateExpenses = (): void => {
+
+    const expenses: number[] = transactions.filter((amount: number) => amount < 0);
+
+    dispatch({ type: Types.CALCULATE_EXPENSE, payload: expenses })
+  }
+
+  const showForm = (close: boolean) => {
+
+    if (close) { dispatch({ type: Types.CLOSE_FORM }) }
+
+    else { dispatch({ type: Types.SHOW_FORM }) }
+
+  }
 
   return <appContext.Provider value={{
     form: state.form,
     transactions: state.transactions,
     balance: state.balance,
-    income : state.income,
+    income: state.income,
     expense: state.expense,
     addTransaction,
     deleteTransaction,
     calculateBalance,
     calculateIncome,
     calculateExpenses,
-    showForm
+    showForm,
 
   }}>  {children}
-   </appContext.Provider>
+  </appContext.Provider>
 }
 
 export default AppState
