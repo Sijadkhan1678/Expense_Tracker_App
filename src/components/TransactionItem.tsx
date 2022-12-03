@@ -10,7 +10,7 @@ console.log('amount value',amount)
 const {deleteTransaction} = useContext(appContext)
  return (
     <li>
-    <button onClick={()=> deleteTransaction(id)}>X</button>
+    <button onClick={()=> id && deleteTransaction(id)}>X</button>
     <img style={{width:36,padding:0,marginRight:'5px'}} src={img} alt='img' />
      {title}
   <div style={{textAlign: 'center',display:'inline',marginLeft:title.length >6 ? '11rem' : '12.2rem'}}>
